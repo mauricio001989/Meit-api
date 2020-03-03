@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV['USERNAME_DB'] %>
+  password: <%= ENV['PASSWORD_DB'] %>
+
+development:
+  <<: *default
+  database: meit_rails_development
+
+test:
+  <<: *default
+  database: Meit_rails_test
+
+production:
+  <<: *default
+  database: Meit_rails_production
