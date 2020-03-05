@@ -42,15 +42,14 @@ describe Api::V1::ConcertsController do
     end
 
     context 'when user is are logged in' do
-      # TODO: user login, for get http request
+      let!(:user) { create(:user) }
+      include_context 'logger user'
 
-      #   include_context 'authenticated user'
+      before { http_request }
 
-      #   before { http_request }
-
-      #   it 'responds with created status code' do
-      #     expect(response).to have_http_status(:created)
-      #   end
+      it 'responds with created status code' do
+        expect(response).to have_http_status(:created)
+      end
     end
   end
 end

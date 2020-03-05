@@ -9,6 +9,7 @@ AllCops:
     - bin/**/*
     - node_modules/**/*
     - Gemfile
+    - db/**/*
 
 Documentation:
   Enabled: false

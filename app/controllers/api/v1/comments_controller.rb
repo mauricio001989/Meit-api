@@ -11,7 +11,10 @@ module Api
       # POST /api/v1/comments + Key
       def create
         @comment = Comment.new(comment_params)
-        return render json: @comment, status: :created if @comment.save
+        if @comment.save
+          ActionCable.server.broadcast 'ChatChannel', @comment
+          return render json: @comment, status: :created
+        end
 
         render json: @comment.errors, status: :unprocessable_entity
       end
