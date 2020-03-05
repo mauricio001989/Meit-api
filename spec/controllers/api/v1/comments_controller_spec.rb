@@ -14,6 +14,21 @@ describe Api::V1::CommentsController do
         expect(response).to have_http_status(:unauthorized)
       end
     end
+
+    context 'when user is logged in' do
+      let!(:user) { create(:user) }
+      include_context 'logger user'
+
+      before do
+        http_request
+      end
+
+      context 'validate state code' do
+        it 'white responds ok' do
+          expect(response).to have_http_status(:ok)
+        end
+      end
+    end
   end
 
   # POST /api/v1/concerts + Key
@@ -40,15 +55,14 @@ describe Api::V1::CommentsController do
     end
 
     context 'when user is are logged in' do
-      # TODO: user login, for get http request
+      let!(:user) { create(:user) }
+      include_context 'logger user'
 
-      #   include_context 'authenticated user'
+      before { http_request }
 
-      #   before { http_request }
-
-      #   it 'responds with created status code' do
-      #     expect(response).to have_http_status(:created)
-      #   end
+      it 'responds with created status code' do
+        expect(response).to have_http_status(:created)
+      end
     end
   end
 end
